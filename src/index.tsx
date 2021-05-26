@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import ReactDOM from "react-dom";
+import { RemoteComponent } from "@paciolan/remote-component";
 import reportWebVitals from './reportWebVitals';
 
+//const url = "https://localhost:8094/react-shop-in-3d.js"; // prettier-ignore
+const url = "http://localhost:9090/main.js";
+
+const ShopIn3dPlayer = ({ color, type }: any) => {
+  return <RemoteComponent url={url} color={color} type={type} />;
+}
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <ShopIn3dPlayer color='red' type='cube' />,
+  document.getElementById('shop-in-3d-root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
