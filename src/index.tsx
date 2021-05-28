@@ -6,7 +6,11 @@ import reportWebVitals from './reportWebVitals';
 const url = "http://localhost:9090/main.js";
 
 const ShopIn3dPlayer = ({ color, type }: any) => {
-  return <RemoteComponent url={url} color={color} type={type} />;
+  return  (
+    <div id="remote-component">
+      <RemoteComponent url={url} color={color} type={type} />
+    </div>
+  );
 }
 
 ReactDOM.render(
