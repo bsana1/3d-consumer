@@ -78,14 +78,12 @@
 
   <div>
     <h1>Remotely loaded React bundle</h1>
-    <div id="root">
-      <div id="shop-in-3d-root"></div>
-    </div>
+    <div id="shop-in-3d-root" />
   </div>
 
   <div>
     <h1>Embedded iFrame loading</h1>
-    <iframe width="680px" height="480px" src="http://localhost:9090?type=cube&color=red&height=480" frameborder="0"></iframe>
+    <iframe id="shop-in-3d-frame" width="680px" height="480px" src="http://localhost:9090?type=cube&color=red&height=200&width=300" frameborder="0"></iframe>
   </div>
 
   <!-- Load via modal -->
@@ -96,7 +94,7 @@
   <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <iframe width="680px" height="480px" src="http://localhost:9090?type=cube&color=blue&height=480" frameborder="0"></iframe>
+      <iframe width="680px" height="480px" src="http://localhost:9090?type=cylinder&color=blue&height=480" frameborder="0"></iframe>
     </div>
   </div>
 
