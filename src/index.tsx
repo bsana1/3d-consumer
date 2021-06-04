@@ -1,34 +1,57 @@
+import { useState } from 'react'
 import ReactDOM from "react-dom";
-import { RemoteComponent } from "@paciolan/remote-component";
+
+import OptionsMenu from './OptionsMenu';
+import Modal from './Modal';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 
 //const url = "https://localhost:8094/react-shop-in-3d.js"; // prettier-ignore
 const url = "http://localhost:9090/main.js";
 
-const ShopIn3d = ({ color, type }: any) => {
-  const node: any = document.getElementById('shop-in-3d-frame');
-  console.log("###", node)
+const ShopIn3d = (props: any) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const closeModal = () => {
+    return () => {
+      setIsModalVisible(false)
+    }
+  }
+
+   // event handlers
+   window.onmessage = function (e: any) {
+    if (e.data && e.data.type == "TEST") {
+      console.log(`**** OMG!!!: [${e.data.type}, ${e.data.value}]`);
+    }
+  };
+
   return (
-    <div className="wrapper">
-      <div className="options-menu">
-        <ul>
-          <li onClick={() => { node && node.contentWindow.postMessage({ type: 'change-model', value: 'cylinder' }, '*'); }}>device 1</li>
-          <li>device 2</li>
-          <li>device 3</li>
-          <li>device 4</li>
-          <li>device 5</li>
-        </ul>
+    <div>
+      <div className="wrapper">
+        <OptionsMenu />
+
+        <button className="modal-button"onClick={() => { setIsModalVisible(!isModalVisible) }} >
+          Show in modal
+        </button>
       </div>
-      <div id="root" >
-        <RemoteComponent url={url} color={color} type={type} />
+
+      <div className="content">
+        {
+          isModalVisible && <Modal onClose={closeModal} />
+        }
+
+        {!isModalVisible && (
+          <div className="iframe-container">
+            <iframe id="shop-in-3d-frame" src="http://localhost:9090?type=cube&color=red&width=800&height=500" width="100%" height="100%" frameBorder="0" />
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 ReactDOM.render(
-  <ShopIn3d color='red' type='cube' />,
+  <ShopIn3d />,
   document.getElementById('shop-in-3d-root')
 );
 

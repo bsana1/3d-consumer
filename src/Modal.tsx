@@ -1,19 +1,13 @@
-import React from 'react'
-import './Modal.css'
+import './modal.css'
 
-const Modal = () => {
+const Modal = ({ onClose }: { onClose?: any }) => {
   return (
-    <>
-      <button id="myBtn">Open Modal</button>
-      <div id="myModal" className="modal">
-
-        <div className="modal-content">
-          <span className="close">&times;</span>
-          <p>Some text in the Modal..</p>
-        </div>
-
+    <div id="myModal" className="modal">
+      <div className="modal-content">
+        <span className="close" onClick={onClose && onClose()}>&times;</span>
+        <iframe id="shop-in-3d-frame" src="http://localhost:9090?type=cylinder&color=blue&width=800&height=500" width="100%" height="100%" frameBorder="0" />
       </div>
-    </>
+    </div>
   )
 }
 
