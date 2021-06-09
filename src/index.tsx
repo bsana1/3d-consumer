@@ -3,11 +3,10 @@ import ReactDOM from "react-dom";
 
 import OptionsMenu from './OptionsMenu';
 import Modal from './Modal';
+import Embedded3dPlayer from './Embedded3dPlayer';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 
-//const url = "https://localhost:8094/react-shop-in-3d.js"; // prettier-ignore
-const url = "http://localhost:9090/main.js";
 
 const ShopIn3d = (props: any) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -18,19 +17,19 @@ const ShopIn3d = (props: any) => {
     }
   }
 
-   // event handlers
-   window.onmessage = function (e: any) {
+  // event handlers
+  window.onmessage = function (e: any) {
     if (e.data && e.data.type == "TEST") {
       console.log(`**** OMG!!!: [${e.data.type}, ${e.data.value}]`);
     }
   };
 
   return (
-    <div>
+    <div className="root">
       <div className="wrapper">
         <OptionsMenu />
 
-        <button className="modal-button"onClick={() => { setIsModalVisible(!isModalVisible) }} >
+        <button className="modal-button" onClick={() => { setIsModalVisible(!isModalVisible) }} >
           Show in modal
         </button>
       </div>
@@ -40,11 +39,8 @@ const ShopIn3d = (props: any) => {
           isModalVisible && <Modal onClose={closeModal} />
         }
 
-        {!isModalVisible && (
-          <div className="iframe-container">
-            <iframe id="shop-in-3d-frame" src="http://localhost:9090?type=cube&color=red&width=800&height=500" width="100%" height="100%" frameBorder="0" />
-          </div>
-        )}
+        {!isModalVisible && <Embedded3dPlayer />
+        }
       </div>
     </div>
   );
