@@ -83,7 +83,9 @@
 
   <div>
     <h1>Embedded iFrame loading</h1>
-    <iframe id="shop-in-3d-frame" width="680px" height="480px" src="http://localhost:9090?type=cube&color=red&height=200&width=300" frameborder="0"></iframe>
+    <iframe id="shop-in-3d-frame" width="680px" height="480px"
+      src="http://localhost:3001/?experienceId=af23c46a-3423-4bf9-b239-d04883d9aebf&clientId=PDPb452dcbe"
+      frameborder="0"></iframe>
   </div>
 
   <!-- Load via modal -->
@@ -94,7 +96,8 @@
   <div id="myModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <iframe width="680px" height="480px" src="http://localhost:9090?type=cylinder&color=blue&height=480" frameborder="0"></iframe>
+      <iframe width="680px" height="480px" src="http://localhost:9090?type=cylinder&color=blue&height=480"
+        frameborder="0"></iframe>
     </div>
   </div>
 
@@ -120,6 +123,40 @@
       }
     }
   </script>
+  <script> var exports = {};</script>
+
+  <script>
+    onSi3dReady = function () {
+      // add the window.microsoft.si3d.api APIs calls here
+      window.microsoft.si3d.api.removePenByColorName('poppy red');
+    }
+  </script>
+  
+  <script>
+    onSi3dClientApiLoaded = function (iframeId) {
+      var si3dApi = new window.Si3dClientApi(iframeId)
+
+      var waitUntilReady = function (si3dApi, callback) {
+        si3dApi.isReady();
+        if (!si3dApi.getLastResponse()) {
+          setTimeout(waitUntilReady, 500, si3dApi)
+        } else {
+          // Export the apis in window.microsoft.si3d.api
+          var microsoft = window.microsoft || {};
+          microsoft.si3d = microsoft.si3d || {};
+          microsoft.si3d.api = microsoft.si3d.api || si3dApi;
+          window.microsoft = microsoft;
+
+          onSi3dReady(si3dApi);
+        }
+      }
+
+      waitUntilReady(si3dApi);
+    }
+  </script>
+
+  <script src="http://localhost:3001/dist/si3d.client.api.js"
+    onload="onSi3dClientApiLoaded('shop-in-3d-frame')"></script>
 </body>
 
 </html>
