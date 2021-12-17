@@ -5,64 +5,10 @@
   body {
     font-family: Arial, Helvetica, sans-serif;
   }
-
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  /* Modal Content */
-  .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
-
-  /* The Close Button */
-  .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
 </style>
 
 <head>
   <meta charset="utf-8" />
-
-  <!-- dynamically load shop-in-3d bundle
-  <script> var exports = {}; </script>
-  <script>
-    (function () {
-      var d = document,
-        h = d.getElementsByTagName('head')[0],
-        s = d.createElement('script');
-
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://localhost:8094/react-shop-in-3d.js';
-      h.appendChild(s);
-    })();
-  </script> !-->
-
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
@@ -70,7 +16,7 @@
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-  <title>Generic 3D Consumer</title>
+  <title>3D Consumer Site</title>
 </head>
 
 <body>
@@ -78,7 +24,7 @@
 
   <div>
     <h1>Remotely loaded React bundle</h1>
-    <div id="shop-in-3d-root" />
+    <div id="shop-in-3d-root"></div>
   </div>
 
   <div>
@@ -157,6 +103,8 @@
 
   <script src="http://localhost:3001/dist/si3d.client.api.js"
     onload="onSi3dClientApiLoaded('shop-in-3d-frame')"></script>
+  <div id="shop-in-3d-comm">
+  <div id="shop-in-3d-root">
 </body>
 
 </html>
